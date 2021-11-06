@@ -37,7 +37,14 @@
             </span>
             <% } %>
             <br>
-
+            <% if (theme.upyun && theme.upyun.enable) { %>
+            <span id="upyun_container_site">
+               <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+               本网站由<img src="<%- url_for(theme.upyun.logo) %>" width="80" height="30"/>提供CDN加速/云存储服务
+               </a>
+            </span>
+            <br>
+            <% } %>
             <!-- 运行天数提醒. -->
             <% if (theme.time.enable) { %>
                 <span id="sitetime"> Loading ...</span>
