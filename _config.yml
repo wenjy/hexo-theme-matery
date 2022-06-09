@@ -97,6 +97,26 @@ music:
   listFolded: true  # 列表默认折叠
   hideLrc: true     # 隐藏歌词
 
+# Whether to display the musics.
+# 单独的音乐页面.
+musics:
+  enable: false
+  title:          #非吸底模式有效
+    enable: true
+    show: 听听音乐
+  server: tencent   #require music platform: netease, tencent, kugou, xiami, baidu
+  type: playlist    #require song, playlist, album, search, artist
+  id: 1776127550     #require song id / playlist id / album id / search keyword
+  fixed: false      # 开启吸底模式
+  autoplay: true   # 是否自动播放
+  theme: '#42b983'
+  loop: 'all'       # 音频循环播放, 可选值: 'all', 'one', 'none'
+  order: 'random'   # 音频循环顺序, 可选值: 'list', 'random'
+  preload: 'auto'   # 预加载，可选值: 'none', 'metadata', 'auto'
+  volume: 0.7       # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
+  listFolded: false  # 列表默认折叠
+  listMaxHeight: "525px" #列表最大高度
+
 # Whether to display the videos.
 # 是否在首页显示视频.
 video:
@@ -344,13 +364,22 @@ livere:
   enable: false
   uid:
 
+# 腾讯人机验证
+# 注意：目前只适配和测试了valine，其它评论系统未调试验证！
+# 介绍: https://cloud.tencent.com/document/product/1110/36841
+# 管理验证码: https://console.cloud.tencent.com/captcha/graphical
+tcaptcha:
+  enable: true
+  appid: xxxxxxxxxx # 你的appid
+
 # The configuration of the Valine comment module is not activated by default.
 # To use it, activate the configuration item and set appId and appKey.
 # Valine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
 valine:
   enable: false
-  appId:
-  appKey:
+  appId:  # 必填
+  appKey: # 必填
+  serverURLs: # 必填 https://你的api
   notify: false
   verify: false
   visitor: true
@@ -370,6 +399,17 @@ minivaline:
   # emoticonUrl 等列表选项 可参考 https://github.com/MiniValine/hexo-next-minivaline
   # 下面是一个例子：
   serverURL: https://minivaline.your-domain.top
+
+# The configuration of the Waline comment module is not activated by default.
+# To use it, activate the configuration item.
+# Waline 评论模块的配置，默认为不激活，如要使用，就请激活该配置项
+# See: https://waline.js.org/
+waline:
+  enable: false
+  # Waline 服务端部署参考 https://waline.js.org/guide/server/intro.html 客户端和服务端版本需一致
+  # 下面是一个例子，请替换成自己的服务端
+  serverURL: https://waline.your-domain.com
+  avatar: 'mp' # Gravatar style : ''/mp/identicon/monsterid/wavatar/retro/hide
 
 changyan:
   enable: false
@@ -433,36 +473,45 @@ libs:
   css:
     matery: /css/matery.css
     mycss: /css/my.css
-    fontAwesome: /libs/awesome/css/all.min.css # V5.15.4
-    materialize: /libs/materialize/materialize.min.css # 1.0.0
+    gallery: /css/gallery.css
+    fontAwesome: /libs/awesome/css/all.min.css # V6 20220313
+    materialize: /libs/materialize/materialize.min.css # 1.0.0 20211109
     aos: /libs/aos/aos.css
     animate: /libs/animate/animate.min.css # V3.5.1
-    lightgallery: /libs/lightGallery/css/lightgallery.min.css # V1.6.11
+    lightgallery: /libs/lightGallery/css/lightgallery.min.css # V1.10.0
     aplayer: /libs/aplayer/APlayer.min.css
     dplayer: /libs/dplayer/DPlayer.min.css
     gitalk: /libs/gitalk/gitalk.css
     jqcloud: /libs/jqcloud/jqcloud.css
     tocbot: /libs/tocbot/tocbot.css
-    prism: /libs/prism/prism.css
+    prism: /libs/prism/prism.min.css
+    mermaid: /libs/mermaid/mermaid.min.css
+    fancybox: /libs/fancybox/jquery.fancybox.css
+    justifiedGallery: /libs/justifiedGallery/justifiedGallery.min.css
   js:
     matery: /js/matery.js
-    jquery: /libs/jquery/jquery.min.js
+    jquery: /libs/jquery/jquery-3.6.0.min.js  #3.6.0 20211109
     materialize: /libs/materialize/materialize.min.js # 1.0.0
     masonry: /libs/masonry/masonry.pkgd.min.js # v4.0.0
     aos: /libs/aos/aos.js
     scrollProgress: /libs/scrollprogress/scrollProgress.min.js
-    lightgallery: /libs/lightGallery/js/lightgallery-all.min.js # V1.6.11
+    lightgallery: /libs/lightGallery/js/lightgallery-all.min.js # V1.10.0
     typed: /libs/typed/typed.js
     clicklove: /libs/others/clicklove.js
     sakura: /libs/others/sakura.js
+    star: /libs/others/star.js
+    snow: /libs/others/snow.js
+    tcaptcha: /libs/others/TencentCaptcha.js
     busuanzi: /libs/others/busuanzi.pure.mini.js
     aplayer: /libs/aplayer/APlayer.min.js
+    meting: /libs/aplayer/Meting.min.js
     dplayer: /libs/dplayer/DPlayer.min.js
     crypto: /libs/cryptojs/crypto-js.min.js
     echarts: /libs/echarts/echarts.min.js
     gitalk: /libs/gitalk/gitalk.min.js
     valine: /libs/valine/Valine.min.js # 若想保持最新版，请替换为 https://unpkg.com/valine/dist/Valine.min.js  默认为 /libs/valine/Valine.min.js
     minivaline: /libs/minivaline/MiniValine.js # latest
+    waline: /libs/waline/Waline.min.js # 若想保持最新版，请替换为 https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js 默认为(1.5.2版本) /libs/valine/Valine.min.js
     twikoo: /libs/twikoo/twikoo.all.min.js # 若想保持最新版，请替换为 https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js  默认为 /libs/twikoo/twikoo.all.min.js
     jqcloud: /libs/jqcloud/jqcloud-1.0.4.min.js
     tocbot: /libs/tocbot/tocbot.min.js
@@ -471,6 +520,14 @@ libs:
     ribbonRefresh: /libs/background/ribbon-refresh.min.js
     ribbon_dynamic: /libs/background/ribbon-dynamic.js
     instantpage: /libs/instantpage/instantpage.js
+    mermaid: /libs/mermaid/mermaid.min.js
+    fancybox: /libs/fancybox/fancybox.js
+    justifiedGallery: /libs/justifiedGallery/justifiedGallery.min.js
+    prism: /libs/prism/prism.min.js
+    codeblock: /libs/codeBlock/codeBlockFuction.js
+    codelang: /libs/codeBlock/codeLang.js
+    codecopy: /libs/codeBlock/codeCopy.js
+    codeshrink: /libs/codeBlock/codeShrink.js
 
 # The post featured images that needs to be displayed when there is no image.
 # 无文章特色图片时需要显示的文章特色图片.
@@ -640,16 +697,17 @@ artitalk:
 # 关注公众号 "黑石哔哔"，发送: //bindCurrentUser:你的APPID,你的MASTERKEY,你的RESTAPI
 # 可用leancloud国际版，国际版api为 https://appid前八位.api.lncldglobal.com
 bbtime:
- enable: false
- appId: # 你的appId
- appKey: # 你的appKey
- serverURLs: # https://你的api
+  enable: false
+  appId: # 你的appId
+  appKey: # 你的appKey
+  serverURLs: # https://你的api
 
 
 # 图表绘制插件
 # 建议更换更换hexo-renderer-markdown-it引擎。参考下面链接
 # https://github.com/hexojs/hexo-renderer-markdown-it
 # https://github.com/hexojs/hexo-renderer-markdown-it/wiki/Advanced-Configuration
+# 使用教程： https://blog.17lai.site/posts/cf0f47fd/#Mermaid
 # 安装配置方法
 # yarn remove hexo-renderer-marked
 # yarn add hexo-renderer-markdown-it hexo-tag-mermaid

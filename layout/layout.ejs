@@ -2,10 +2,6 @@
 <html lang="<%= config.language %>">
 <%- partial('_partial/head') %>
 
-<% if (theme.background.enable) { %>
-   <%- partial('_partial/background') %>
-<% } %>
-
 <body>
     <%- partial('_partial/header') %>
     <%- body %>
@@ -23,7 +19,8 @@
     <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.matery) %>"></script>
 
     <% if (theme.mermaid.enable) { %>
-        <script src='https://unpkg.com/mermaid@<%= theme.mermaid.version %>/dist/mermaid.min.js'></script>
+        <!-- <script src='https://unpkg.com/mermaid@<%= theme.mermaid.version %>/dist/mermaid.min.js'></script> -->
+        <script src='<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.mermaid) %>'></script>
         <script>
           if (window.mermaid) {
             mermaid.initialize({theme: 'forest'});
@@ -62,6 +59,12 @@
                 document.write('<script type="text/javascript" src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.star) %>"><\/script>');
             }
         </script>
+    <% } %>
+
+    <% if (theme.tcaptcha.enable) { %> 
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.tcaptcha) %>"></script>
+        <button id="TencentCaptcha" data-appid="<%- theme.tcaptcha.appid %>" data-cbfn="callback" type="button" hidden></button>
     <% } %>
 
     <%- partial('_partial/baidu-analytics') %>
